@@ -27,10 +27,16 @@ if __name__ == '__main__':
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print(device)
     net.to(device)
-    summary(net, (3, 512, 512))
+    summary(net, (3, 224, 224))
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=args.momentum)
-    train(num_epochs=args.epochs, loader=train_loader, device=device, net=net,
-          criterion=criterion, optimizer=optimizer)
+
+    inference(loader=train_loader, device=device, net=net)
     inference(loader=test_loader, device=device, net=net)
-    torch.save(net, str(time.time()) + '.pt')
+
+    for i in range(0, args.epochs):
+        train(num_epochs=1, loader=train_loader, device=device, net=net,
+              criterion=criterion, optimizer=optimizer)
+        inference(loader=test_loader, device=device, net=net)
+
+    torch.save(net, str(time.time()) + '.pth')

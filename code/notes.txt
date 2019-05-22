@@ -1,5 +1,8 @@
 dev: 1129
 train: 4527
 classes: 5(Quite unbalanced)
-resolution: Various(Currently resized to 512x512)
-baseline: ResNet-18 (2G memory can only train with batch size 8, maybe consider smaller resolution&smaller models)
+resolution: Various(Currently resized to 224x224, higher resolution doesn't seem to help at this point)
+baseline: ResNet-18/vgg11 finetune, doesn't seem to work at all,
+          overfits right after 1st epoch, cv acc around 46%, fu*k this!
+          Though somebody reached 66% with mobileNetV2...
+          Why don't we have this kind of compact model in PyTorch?
