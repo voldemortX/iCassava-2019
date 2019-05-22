@@ -1,0 +1,5 @@
+dev: 1129
+train: 4527
+classes: 5(Quite unbalanced)
+resolution: Various(Currently resized to 512x512)
+baseline: ResNet-18 (2G memory can only train with batch size 8, maybe consider smaller resolution&smaller models)
